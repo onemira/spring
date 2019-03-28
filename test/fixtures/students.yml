@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  house: MyString
+  born: 2019-03-26
+  house: one
+
+two:
+  name: MyString
+  house: MyString
+  born: 2019-03-26
+  house: two

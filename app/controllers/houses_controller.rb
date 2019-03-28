@@ -2,38 +2,47 @@ class HousesController < ApplicationController
   before_action :set_house, only: [:show, :update, :destroy]
 
   # GET /houses
-  def index
-    @houses = House.all
+  # GET /houses.json
+  def index 
+    search = params[:search]
 
-    render json: @houses
+    if search.present?
+      @houses = House.where("name ilike ?", "%#{search}%")
+    else
+      @houses = House.all
+    end
   end
-
+  
   # GET /houses/1
+  # GET /houses/1.json
   def show
     render json: @house
   end
 
-  # POST /houses
+# POST /houses
+# POST /houses.json
   def create
     @house = House.new(house_params)
 
     if @house.save
-      render json: @house, status: :created, location: @house
+      render :show, status: :created, location: @house
     else
       render json: @house.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /houses/1
+    # PATCH/PUT /houses/1.json
   def update
     if @house.update(house_params)
-      render json: @house
+      render :show, status: :ok, location: @house
     else
       render json: @house.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /houses/1
+  # DELETE /houses/1.json
   def destroy
     @house.destroy
   end
