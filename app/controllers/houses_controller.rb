@@ -3,7 +3,7 @@ class HousesController < ApplicationController
 
   # GET /houses
   # GET /houses.json
-  def index 
+  def index
     search = params[:search]
 
     if search.present?
@@ -12,15 +12,14 @@ class HousesController < ApplicationController
       @houses = House.all
     end
   end
-  
+
   # GET /houses/1
   # GET /houses/1.json
   def show
-    render json: @house
   end
 
-# POST /houses
-# POST /houses.json
+  # POST /houses
+  # POST /houses.json
   def create
     @house = House.new(house_params)
 
@@ -32,7 +31,7 @@ class HousesController < ApplicationController
   end
 
   # PATCH/PUT /houses/1
-    # PATCH/PUT /houses/1.json
+  # PATCH/PUT /houses/1.json
   def update
     if @house.update(house_params)
       render :show, status: :ok, location: @house
@@ -53,7 +52,7 @@ class HousesController < ApplicationController
       @house = House.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def house_params
       params.require(:house).permit(:name, :mascot, :head, :element, :founder)
     end

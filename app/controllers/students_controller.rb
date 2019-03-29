@@ -2,16 +2,19 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :update, :destroy]
 
   # GET /students
+  # GET /students.json
   def index
     @house = House.find(params[:house_id])
     @students = @house.students.all
   end
 
   # GET /students/1
+  # GET /students/1.json
   def show
   end
 
   # POST /students
+  # POST /students.json
   def create
     @house = House.find(params[:house_id])
     @student = @house.students.new(student_params)
@@ -24,6 +27,7 @@ class StudentsController < ApplicationController
   end
 
   # PATCH/PUT /students/1
+  # PATCH/PUT /students/1.json
   def update
     if @student.update(student_params)
       render :show, status: :ok
@@ -33,18 +37,17 @@ class StudentsController < ApplicationController
   end
 
   # DELETE /students/1
+  # DELETE /students/1.json
   def destroy
     @student.destroy
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_student
       @house = House.find(params[:house_id])
       @student = @house.students.find(params[:id])
     end
 
-    # Only allow a trusted parameter "white list" through.
     def student_params
       params.require(:student).permit(:name, :house, :born, :house_id)
     end

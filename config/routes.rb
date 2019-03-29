@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :houses
   scope :api, defaults: { format: :json } do
     resources :houses do
       resources :students
